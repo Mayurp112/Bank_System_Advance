@@ -1,55 +1,83 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base.html' %} {% block title %} Transactions | {{ block.super }} {% endblock title %} {% block content %} {% include "core/messages.html" %}
 
-{% block title %} Transactions | {{ block.super }}{% endblock title %}
 
-{% block content %}
-{% include "core/messages.html" %}
+<style>
 
-    <div class="page-header">
-      <h1 class="text-center"><b>Banking System</b><br><small>ABC Bank Ltd.</small></h1>
-    </div>
-    
-<div class="row">
+  .table-title {
+    background-color: #c1dffd; /* Use your desired background color here */
+  }
 
-  <div class="col-xs-12 col-md-8 text-left">
-    <h4><b>Account Name: </b>{{ user.full_name }}</h4>
-    <h4><b>Date of Birth: </b>{{ user.account.birth_date }}</h4>
-    <h4><b>Gender: </b>{{ user.account.get_gender_display }}</h4>
-    <h4><b>Contact No: </b>{{ user.contact_no }}</h4>
-    <h4><b>Email Address: </b>{{ user.email }}</h4>
-    <h4><b>Address: </b>{{ user.full_address }}</h4>
+  .awt-2{
+    box-shadow: #9ce4fa;
+  }
+
+  #mp{
+    border-radius: 1%;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  }
+
+  #mp2{
+    box-shadow: 12px 12px 2px 1px rgba(43, 34, 34, 0.2);
+
+  }
+</style>
+
+
+<div class="page-header ">
+  <h1 class="text-center"><b>ACCOUNT DETAILS</b></h1>
+</div>
+<br><br>
+
+<div class="row border my-2 py-5 table-title awt-2" id="mp">
+  
+  <div class="col-xs-12 col-md-8 text-left ">
+    <h5><b>Account Name: </b>{{ user.full_name }}</h5>
+    <h5><b>Date of Birth: </b>{{ user.account.birth_date }}</h5>
+    <h5><b>Gender: </b>{{ user.account.get_gender_display }}</h5>
+    <h5><b>Contact No: </b>{{ user.contact_no }}</h5>
+    <h5><b>Email Address: </b>{{ user.email }}</h5>
+    <h5><b>Address: </b>{{ user.full_address }}</h5>
   </div>
   <div class="col-xs-6 col-md-4 text-left">
-    <h4><b>Account Created: </b>{{ user.date_joined|date:'d-m-Y' }}</h4>
-    <h4><b>Account No: </b>{{ user.account_no }}</h4><br><br>
-    <div class="well">
-    <h4 class="card"><b>Account Balance: </b>{{ user.balance }} $</h4>
-    <a class="btn btn-success" href="{% url 'transactions:deposit' %}">Deposit</a>
-    <a class="btn btn-danger" href="{% url 'transactions:withdrawal' %}">Withdraw</a>
+    <h5><b>Account Created : </b>{{ user.date_joined|date:'d-m-Y' }}</h5>
+    <h5><b>Account No : </b>{{ user.account_no }}</h5>
+    <br /><br />
+    <div class="well mb-2">
+      <h5 class="card mb-1 py-2 bg-body-secondary text-center">
+        <b>Account Balance : </b>{{ user.balance }}₹
+      </h5>
+      <a class="btn btn-success" href="{% url 'transactions:deposit' %}"
+        >Deposit</a
+      >
+      <a class="btn btn-danger" href="{% url 'transactions:withdrawal' %}"
+        >Withdraw</a
+      >
+      <br>
     </div>
   </div>
-
+  
 </div>
-
 <hr>
 
-  <div class="page-header">
-  <h2 class="text-center"><b>Transaction Details</b></h2>
+<br><br><br>
+
+<div class="page-header">
+  <h1 class="text-center"><b>TRANSACTION DETAILS</b></h1>
 </div>
 
 <h3>Deposit Details</h3>
-<table class="table table-hover table-bordered">
-  <thead>
+<table class="table table-hover table-bordered" id="mp2">
+  <thead class="table-title">
     <tr>
-      <th>#</th>
+      <th class="bg-body-secondary">#</th>
       <th>Date / Time</th>
       <th>Details</th>
-      <th>Amount ($)</th>
+      <th>Amount (₹)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-    {% for obj in deposit %}
+      {% for obj in deposit %}
       <th scope="row">{{forloop.counter}}</th>
       <td>{{ obj.timestamp }}</td>
       <td>Deposit</td>
@@ -59,27 +87,26 @@
     <tr>
       <th class="text-right" scope="row" colspan="3">Total</th>
 
-      <td>{{ deposit_sum }}</td>
+      <td>{{ deposit_sum }} ₹</td>
     </tr>
-   
   </tbody>
 </table>
-<hr>
-
+<br><br>
+<hr />
 
 <h3>Withdrawal Details</h3>
-<table class="table table-hover table-bordered">
-  <thead>
+<table class="table table-hover table-bordered" id="mp2">
+  <thead class="table-title">
     <tr>
       <th>#</th>
       <th>Date / Time</th>
       <th>Details</th>
-      <th>Amount ($)</th>
+      <th>Amount (₹)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-    {% for obj in withdrawal %}
+      {% for obj in withdrawal %}
       <th scope="row">{{forloop.counter}}</th>
       <td>{{ obj.timestamp }}</td>
       <td>Withdrawal</td>
@@ -89,27 +116,26 @@
     <tr>
       <th class="text-right" scope="row" colspan="3">Total</th>
 
-      <td>{{ withdrawal_sum }}</td>
+      <td>{{ withdrawal_sum }} ₹</td>
     </tr>
-   
   </tbody>
 </table>
-<hr>
-
+<br><br>
+<hr />
 
 <h3>Interest Details</h3>
-<table class="table table-hover table-bordered">
-  <thead>
+<table class="table table-hover table-bordered" id="mp2">
+  <thead class="table-title">
     <tr>
       <th>#</th>
       <th>Date / Time</th>
       <th>Details</th>
-      <th>Amount ($)</th>
+      <th>Amount (₹)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-    {% for obj in interest %}
+      {% for obj in interest %}
       <th scope="row">{{forloop.counter}}</th>
       <td>{{ obj.timestamp }}</td>
       <td>Interest</td>
@@ -119,11 +145,11 @@
     <tr>
       <th class="text-right" scope="row" colspan="3">Total</th>
 
-      <td>{{ interest_sum }}</td>
+      <td>{{ interest_sum }} ₹</td>
     </tr>
-   
   </tbody>
 </table>
-<hr>
+<br><br>
+
 
 {% endblock content %}

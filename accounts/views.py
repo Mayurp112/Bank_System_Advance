@@ -56,7 +56,7 @@ def register_view(request):
             return redirect("home")
 
         context = {
-            "title": "Create a Bank Account",
+            "title": "Create Bank Account",
             "user_form": user_form,
             "account_form": account_form,
             "address_form": address_form,
