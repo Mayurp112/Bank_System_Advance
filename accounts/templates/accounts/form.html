@@ -4,6 +4,19 @@
 
 {% block content %}
 {% include "core/messages.html" %}
+
+<style>
+
+    #mp3{
+        background-color: #f5ebaf;
+        box-shadow: 12px 12px 2px 1px rgba(43, 34, 34, 0.2);
+        padding: 15px 15px 5px 5px;
+
+    }
+</style>
+
+
+<div id="mp3">
 <h2>{{ title }}</h2><hr>
 <form method="POST" action="" enctype='multipart/form-data'>
     {% csrf_token %}
@@ -11,4 +24,5 @@
     <br>
     <input class="btn btn-success" type="submit" value='Submit'>
 </form>
+</div>
 {% endblock content %}

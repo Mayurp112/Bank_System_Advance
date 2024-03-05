@@ -4,10 +4,21 @@
 
 {% block content %}
 {% include "core/messages.html" %}
-<h1 class="text-center border border-top-0 bg-light text-dark">{{ title }}</h1><br><br>
+
+<style>
+
+    #mp3{
+        background-color: #f6cfcf;
+        box-shadow: 12px 12px 2px 1px rgba(43, 34, 34, 0.2);
+
+    }
+</style>
+
+<div id="mp3">
+<h1 class="text-center border border-top-0" style="background-color: #f5f9bb;">{{ title }}</h1><br><br>
 
 
-<form method="POST" action="" enctype='multipart/form-data' class="col-10 mx-auto border form-label shadow-lg p-3 mb-5 bg-body-tertiary rounded bg-light text-dark">
+<form method="POST" action="" enctype='multipart/form-data' class="col-10 mx-auto border form-label shadow-lg p-3 mb-5 bg-body-tertiary rounded bg-light text-dark" >
     {% csrf_token %}
     {% for field in user_form %}
         {% if field.name != 'password' %}
@@ -28,5 +39,8 @@
     {% endfor %}
     <br>
     <button class="btn btn-success" type="submit">Submit</button>
+    <br><br>
 </form>
+
+</div>
 {% endblock content %}
